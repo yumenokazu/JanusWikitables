@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <!-- :TODO: add fallback references to local jQuery and datatables -->
+    <script src={{ url_for('static', filename='js/datatable.js') }}></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="container">
+    <header></header>
+    <section id="search">
+        <form id="domain_form" method="POST" onsubmit="return validateForm()">
+            https://
+            <input id="lang_input" name="lang_input" placeholder="en" type="text">
+            .wikipedia.org/wiki/
+            <input id="page_input" name="page_input" placeholder="List_of_Unified_Modeling_Language_tools" type="text">
+            <input style="display: none;" type="submit">
+        </form>
+    </section>
+    <section id="table">
+        {{ table }}
+    </section>
+    <section id="error">
+        {{ error }}
+    </section>
+    <script type="text/javascript">
+        function validateForm() {
+            var lang = document.getElementById('lang_input');
+            var page = document.getElementById('page_input')
+
+            if (lang.value.length === 0) {
+                lang.value = lang.placeholder;
+            }
+            if (page.value.length === 0) {
+                page.value = page.placeholder;
+            }
+
+            return true;
+        }
+    </script>
+    <footer></footer>
+</div>
+</body>
+</html>
